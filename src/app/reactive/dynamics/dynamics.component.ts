@@ -1,58 +1,57 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-dinamicos',
+  selector: 'app-dynamics',
   templateUrl: './dynamics.component.html',
   styles: [
   ]
 })
 export class DynamicsComponent {
 
-  miFormulario: FormGroup = this.fb.group({
-    nombre: [ '', [ Validators.required, Validators.minLength(3) ] ],
-    favoritos: this.fb.array([
+  myForm: FormGroup = this.fb.group({
+    name: [ '', [ Validators.required, Validators.minLength(3) ] ],
+    favorites: this.fb.array([
       [ 'Metal Gear', Validators.required ],
-      [ 'Death Stranding',Validators.required  ],
+      [ 'Death Stranding', Validators.required ],
     ], Validators.required )
   });
 
-  nuevoFavorito: FormControl = this.fb.control('', Validators.required );
+  newFavorite: FormControl = this.fb.control('', Validators.required );
 
-  get favoritosArr() {
-    return this.miFormulario.get('favoritos') as FormArray;
+  get favoritesArray(): FormArray {
+    return this.myForm.get('favorites') as FormArray;
   }
 
   constructor( private fb: FormBuilder ) { }
 
-  campoEsValido( campo: string ) {
-    return this.miFormulario.controls[campo].errors 
-            && this.miFormulario.controls[campo].touched;
+
+fieldIsValid(campo: string ): boolean {
+    return this.myForm.controls[campo].errors != null && this.myForm.controls[campo].touched;
   }
 
-  agregarFavorito() {
-    if ( this.nuevoFavorito.invalid ) { return; }
+  addFavorite(): void {
+    if ( this.newFavorite.invalid ) { return; }
 
     // this.favoritosArr.push( new FormControl( this.nuevoFavorito.value, Validators.required ) );
-    this.favoritosArr.push( this.fb.control(this.nuevoFavorito.value, Validators.required ) );
+    this.favoritesArray.push( this.fb.control(this.newFavorite.value, Validators.required ) );
 
-    this.nuevoFavorito.reset();
+    this.newFavorite.reset();
 
   }
 
-  borrar( i: number ) {
-    this.favoritosArr.removeAt(i);
+  deleteFavorite(i: number ): void {
+    this.favoritesArray.removeAt(i);
   }
 
-  guardar() {
-    
-    if ( this.miFormulario.invalid ) {
-      this.miFormulario.markAllAsTouched();
+  saveFavorite(): void {
+    if ( this.myForm.invalid ) {
+      this.myForm.markAllAsTouched();
       return;
     }
 
     // imprimir el valor del formulario, sólo si es válido
-    console.log(this.miFormulario.value);
+    console.log(this.myForm.value);
   }
 
 }

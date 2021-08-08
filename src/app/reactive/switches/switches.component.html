@@ -2,7 +2,7 @@
 <hr>
 
 
-<form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+<form [formGroup]="myForm" (ngSubmit)="save()">
 
     <!-- Radio -->
     <div class="row mb-3">
@@ -13,7 +13,7 @@
                 <input class="form-check-input"
                        type="radio"
                        value="M"
-                       formControlName="genero"
+                       formControlName="gender"
                        id="radioMasculino">
                 <label class="form-check-label" for="radioMasculino">
                   Masculino
@@ -24,7 +24,7 @@
                 <input class="form-check-input"
                        type="radio"
                        value="F"
-                       formControlName="genero"
+                       formControlName="gender"
                        id="radioFemenino">
                 <label class="form-check-label" for="radioFemenino">
                   Femenino
@@ -42,7 +42,7 @@
             <div class="form-check form-switch mt-2">
                 <input class="form-check-input"
                        type="checkbox"
-                       formControlName="notificaciones"
+                       formControlName="notifications"
                        id="flexSwitchCheckChecked">
                 <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
             </div>
@@ -57,7 +57,7 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="checkbox"
-                       formControlName="condiciones"
+                       formControlName="conditions"
                        id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                   Términos y condiciones de uso
@@ -81,7 +81,7 @@
 
 
 <h5>Valor del formulario</h5>
-<pre>{{ miFormulario.value | json }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 <br>
 
 <h5>Persona</h5>
@@ -89,7 +89,7 @@
 <br>
 
 <h5>Valid</h5>
-<pre>{{ miFormulario.valid }}</pre>
+<pre>{{ myForm.valid }}</pre>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ miFormulario.controls?.terminos?.errors | json }}</pre> -->

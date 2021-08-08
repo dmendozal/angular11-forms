@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col">
 
-        <form (ngSubmit)="guardar()" autocomplete="off" [formGroup]="miFormulario">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="myForm">
             
             <!-- Campo de producto -->
             <div class="mb-3 row">
@@ -13,11 +13,11 @@
                     
                     <input type="text"
                            class="form-control"
-                           formControlName="nombre"
+                           formControlName="name"
                            placeholder="Nombre del producto">
 
                     <span class="form-text text-danger"
-                          *ngIf="campoEsValido('nombre')">
+                          *ngIf="fieldIsValid('name')">
                         Debe de ser de 3 letras
                     </span>
                 </div>
@@ -29,10 +29,10 @@
                 <div class="col-sm-9">
                     <input type="number"
                            class="form-control"
-                           formControlName="precio"
+                           formControlName="price"
                            placeholder="Precio del producto">
                     <span class="form-text text-danger"
-                          *ngIf="campoEsValido('precio')">
+                          *ngIf="fieldIsValid('price')">
                         El precio debe de ser 0 o mayor
                     </span>
                 </div>
@@ -44,11 +44,11 @@
                 <div class="col-sm-9">
                     <input type="number"
                            class="form-control"
-                           formControlName="existencias"
+                           formControlName="existenceCount"
                            placeholder="Existencias del producto">
                     
                     <span class="form-text text-danger"
-                           *ngIf="campoEsValido('existencias')">
+                           *ngIf="fieldIsValid('existenceCount')">
                          Las existencias deben de ser 0 o mayor
                     </span>
                 </div>
@@ -58,7 +58,8 @@
             <div class="row">
                 <div class="col">
                     <button type="submit"
-                            class="btn btn-primary float-end">
+                            class="btn btn-primary float-end"
+                            >
                         Guardar
                     </button>
                 </div>
@@ -78,19 +79,19 @@
     <div class="col">
 
         <span>Valid</span>
-        <pre>{{ miFormulario.valid }}</pre>
+        <pre>{{ myForm.valid }}</pre>
 
         <span>Pristine</span>
-        <pre>{{ miFormulario.pristine }}</pre>
+        <pre>{{ myForm.pristine }}</pre>
 
         <span>Touched</span>
-        <pre>{{ miFormulario.touched }}</pre>
+        <pre>{{ myForm.touched }}</pre>
 
         <span>Value</span>
-        <pre>{{ miFormulario.value | json }}</pre>
+        <pre>{{ myForm.value | json }}</pre>
 
         <span>Precio</span>
-        <pre>{{ miFormulario.controls.price.errors | json }}</pre>
+        <pre>{{ myForm.controls.price.errors | json }}</pre>
     </div>
 </div>
 

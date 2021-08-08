@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-basicos',
+  selector: 'app-basics',
   templateUrl: './basics.component.html',
   styles: [
   ]
@@ -15,38 +15,34 @@ export class BasicsComponent implements OnInit {
   //   existencias: new FormControl(5),
   // })
 
-  miFormulario: FormGroup = this.fb.group({
-    nombre: [ , [ Validators.required, Validators.minLength(3) ]   ],
+  myForm: FormGroup = this.fb.group({
+    name: [ , [ Validators.required, Validators.minLength(3) ]   ],
     price: [ , [ Validators.required, Validators.min(0)] ],
     existenceCount: [ , [ Validators.required, Validators.min(0)] ],
-  })
+  });
 
   constructor( private fb: FormBuilder ) { }
 
-  ngOnInit() {
-    this.miFormulario.reset({
-      nombre: 'RTX 4080ti',
+  ngOnInit(): void {
+    this.myForm.reset({
+      name: 'RTX 4080ti',
       price: 1600
-    })
+    });
   }
 
 
-  campoEsValido( campo: string ) {
-
-    return this.miFormulario.controls[campo].errors 
-            && this.miFormulario.controls[campo].touched;
+  fieldIsValid(campo: string ): boolean{
+    return this.myForm.controls[campo].errors != null && this.myForm.controls[campo].touched;
   }
 
-  guardar() {
-
-    if ( this.miFormulario.invalid )  {
-      this.miFormulario.markAllAsTouched();
+  save(): void {
+    if ( this.myForm.invalid )  {
+      this.myForm.markAllAsTouched();
       return;
     }
 
-
-    console.log(this.miFormulario.value);
-    this.miFormulario.reset();
+    console.log(this.myForm.value);
+    this.myForm.reset();
   }
 
 
